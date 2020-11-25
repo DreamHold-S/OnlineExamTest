@@ -69,7 +69,6 @@ if(!isset($_SESSION["name"])){
     </div>
 </header><!-- End Header -->
 
-
 <main id="main">
     <div class="col-lg-6  col-lg-push-3 "  style="min-height: 500px;  background-color: whitesmoke; margin: auto;  margin-top: 90px;  margin-bottom: 10px;">
         <div class="section-title">
@@ -77,9 +76,12 @@ if(!isset($_SESSION["name"])){
         </div>
         <?php
         $wrong =0;
+        $countCorrect =0;
         $sumscore =0;
         $score30 = 0; // 30 hurtelh
         $score50 = 0; // 30deesh hurtelh
+        $correctArray = array();
+        $wrongArray = array();
         if(isset($_SESSION["answer"]))
         {
             foreach($_SESSION["answer"] as $key => $value)
@@ -90,33 +92,36 @@ if(!isset($_SESSION["name"])){
                 $res = mysqli_query($link,"select * from questions where category = '$sesss' && question_no = '$key'") or die(mysqli_error($link));
                 while ($row = mysqli_fetch_array($res))
                 {
-                    $answer = $row["answer"];
-                    $score = $row["score"];
+                    $answer = trim($row["answer"]);
+                    $score = trim($row["score"]);
                 }
-
                 if(isset($_SESSION["answer"][$key]))
                 {
                     if($answer==$_SESSION["answer"][$key])
                     {
-                        $sumscore = $sumscore+$score;
 
+                        $sumscore = $sumscore+$score;
                         if($key <= 30)
                         {
                             $score30 = $score30 + $score;
+                            array_push($correctArray,$key);
                         }
                         else
                         {
                             $score50 = $score50 + $score;
+                            array_push($correctArray,$key);
                         }
                     }
                     else
                     {
                         $wrong = $wrong+1;
+                        array_push($wrongArray,$key);
                     }
                 }
                 else
                 {
                     $wrong =$wrong+1;
+                    array_push($wrongArray,$key);
                 }
             }
         }
@@ -129,7 +134,7 @@ if(!isset($_SESSION["name"])){
         echo "Нийт Асуулт Оноо=".$sum;
         echo "<br>";
         echo "Нийт Авсан оноо=".$sumscore;
-        echo "</center>"
+        echo "</center>";
         ?>
     </div>
 </main><!-- End #main -->
@@ -138,8 +143,10 @@ if(!isset($_SESSION["name"])){
 
 if(isset($_SESSION["exam_start"]))
 {
+    $correctAr = json_encode($correctArray);
+     $wrongAr  = json_encode($wrongArray);
     $date = date("Y-m-d");
-    mysqli_query($link,"insert into exam_result(id,user_name,exam_type,total_question,correct_answer,wrong_answer,exam_time, scoreA, scoreB)values(NULL ,'$_SESSION[name]','$_SESSION[exam_category]','$sum','$sumscore','$wrong','$date','$score30','$score50' )") or die(mysqli_error($link));
+   mysqli_query($link,"insert into exam_result(id,user_name,exam_type,total_question,correct_answer,wrong_answer,exam_time, scoreA, scoreB, correct, wrong)values(NULL ,'$_SESSION[name]','$_SESSION[exam_category]','$sum','$sumscore','$wrong','$date','$score30','$score50', '$correctAr', '$wrongAr' )") or die(mysqli_error($link));
 }
 
 if(isset($_SESSION["exam_start"])){

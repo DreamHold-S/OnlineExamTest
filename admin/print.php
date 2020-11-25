@@ -59,7 +59,6 @@ $userName = $_GET["id"]
                         <?php
 
                         $date = new DateTime("now", new DateTimeZone('America/New_York') );
-
                         $count = 0;
                         $userRole_query = "SELECT  register.lastname, register.firstName, register.phonenumber,  exam_result.total_question,
                                             exam_result.correct_answer, exam_result.scoreA,exam_result.scoreB

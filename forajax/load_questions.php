@@ -29,13 +29,14 @@ if($count ==0){
 else
 {
     while ($row = mysqli_fetch_array($res)){
-        $question_no = $row["question_no"];
-        $question = $row["question"];
-        $opt1 = $row["opt1"];
-        $opt2 = $row["opt2"];
-        $opt3 = $row["opt3"];
-        $opt4 = $row["opt4"];
-        $score = $row["score"];
+        $question_no = trim($row["question_no"]);
+        $question =  trim($row["question"]);
+        $opt1 = trim($row["opt1"]);
+        $opt2 = trim($row["opt2"]);
+        $opt3 = trim($row["opt3"]);
+        $opt4 = trim($row["opt4"]);
+        $score = trim($row["score"]);
+
     }
     ?>
     <br>

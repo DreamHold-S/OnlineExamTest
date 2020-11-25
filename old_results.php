@@ -98,11 +98,16 @@ if(!isset($_SESSION["name"])){
                                 <tbody>
 
                                 <?php
+                                $correctArray = array();
+                                $wrongArray = array();
+
                                 $count = 0;
                                 $userId = $_SESSION["name"];
                                 $res = mysqli_query($link,"select * from exam_result where user_name = '$userId'") or die(mysqli_error($link));
                                 while ($row = mysqli_fetch_array($res))
                                 {
+                                    $correctArray = $row["correct"];
+                                    $wrongArray = $row["wrong"];;
                                     $count = $count+1;
                                     ?>
                                     <tr>
@@ -125,6 +130,17 @@ if(!isset($_SESSION["name"])){
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
+
+        <div class="section-title">
+            <h2 style="color: red; margin-top: 10px">Шалгалтын тухай мэдээлэл</h2>
+
+            <?php
+
+
+            ?>
+        </div>
+
+
     </div>
 
 </main><!-- End #main -->
