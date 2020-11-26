@@ -55,7 +55,7 @@ if(!isset($_SESSION["name"])){
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="active"><a href="">Нүүр</a></li>
-                <li><a href="old_results.php">Шалгалт</a></li>
+                <li><a href="loadAnalyze.php">Шалгалт</a></li>
                 <li class="drop-down">  <a href=""  style="color: green" > Сайн Байна уу <?php echo $_SESSION["name"]; ?></a>
                     <ul>
                         <li>
@@ -144,9 +144,13 @@ if(!isset($_SESSION["name"])){
 if(isset($_SESSION["exam_start"]))
 {
     $correctAr = json_encode($correctArray);
-     $wrongAr  = json_encode($wrongArray);
+    $wrongAr  = json_encode($wrongArray);
+
+    $newCorrect =  str_replace(str_split('\\/:[?"<>|+]'), '', $correctAr);
+    $newWrong =  str_replace(str_split('\\/:[?"<>|+]'), '', $wrongAr);
+
     $date = date("Y-m-d");
-   mysqli_query($link,"insert into exam_result(id,user_name,exam_type,total_question,correct_answer,wrong_answer,exam_time, scoreA, scoreB, correct, wrong)values(NULL ,'$_SESSION[name]','$_SESSION[exam_category]','$sum','$sumscore','$wrong','$date','$score30','$score50', '$correctAr', '$wrongAr' )") or die(mysqli_error($link));
+    mysqli_query($link,"insert into exam_result(id,user_name,exam_type,total_question,correct_answer,wrong_answer,exam_time, scoreA, scoreB, correct, wrong)values(NULL ,'$_SESSION[name]','$_SESSION[exam_category]','$sum','$sumscore','$wrong','$date','$score30','$score50', '$newCorrect', '$newWrong' )") or die(mysqli_error($link));
 }
 
 if(isset($_SESSION["exam_start"])){

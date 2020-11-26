@@ -42,7 +42,7 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="active"><a href="">Нүүр</a></li>
-                <li><a href="old_results.php">Шалгалт</a></li>
+                <li><a href="loadAnalyze.php">Шалгалт</a></li>
                 <li class="drop-down">  <a href=""  style="color: green" > Сайн Байна уу <?php echo $_SESSION["name"]; ?></a>
                     <ul>
                         <li>

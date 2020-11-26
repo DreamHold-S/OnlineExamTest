@@ -51,7 +51,7 @@ if(!isset($_SESSION["name"])){
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="active"><a href="">Нүүр</a></li>
-                <li><a href="loadAnalyze.php">Шалгалт</a></li>
+                <li><a href="old_results.php">Шалгалт</a></li>
                 <li class="drop-down">  <a href=""  style="color: green" > Сайн Байна уу <?php echo $_SESSION["name"]; ?></a>
                     <ul>
                         <li>
@@ -68,21 +68,22 @@ if(!isset($_SESSION["name"])){
 
 <main id="main">
 
+
     <section id="counts" class="counts section-bg" style="margin-top: 20px;" >
         <div class="container">
-
-
         </div>
     </section>
-    <div class="col-lg-8  col-lg-push-3 "  style="min-height: 500px;  background-color: whitesmoke; margin: auto;  margin-top: 10px;  margin-bottom: 10px;">
-        <div class="section-title">
-            <h2 style="color: red">Шалгалтын тухай мэдээлэл</h2>
-              </div>
+
+    <div class="col-lg-12  col-lg-push-3 "  style="min-height: 500px;  background-color: whitesmoke; margin: auto;  margin-top: 10px;">
+
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
+                            <p style="font-size: 16px; color: red" > 1) Энэ хэсэгт шалгалтын ерөнхий мэдээлэл харуулна </p>
+
+
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
@@ -99,10 +100,12 @@ if(!isset($_SESSION["name"])){
 
                                 <?php
                                 $count = 0;
+                                $correct = 0;
                                 $userId = $_SESSION["name"];
                                 $res = mysqli_query($link,"select * from exam_result where user_name = '$userId'") or die(mysqli_error($link));
                                 while ($row = mysqli_fetch_array($res))
                                 {
+                                    $correct = $row["wrong"];
                                     $count = $count+1;
                                     ?>
                                     <tr>
@@ -118,14 +121,108 @@ if(!isset($_SESSION["name"])){
                                 }
                                 ?>
                                 </tbody>
-                                             </table>
-                </div> <!-- .card -->
-            </div>
+                            </table>
 
+                            <p style="font-size: 16px; color: red " > 2) Доорх хэсэгт шалгалтын дэлгэрэнгүй мэдээлэл харуулах ба зөвхөн алдсан хэсгийн асуултууд харуулна  </p>
+
+                            <table class="table table-bordered">
+                                <tbody>
+                                <?php
+                                $count = 0;
+                                $userId = $_SESSION["name"];
+                                $arr = explode(',', $correct);
+                                $random = rand(1,4);
+                                $sql = 'SELECT * 
+                                        FROM questions 
+                                        WHERE question_no IN (' . implode(',', array_map('intval', $arr)) . ')';
+                                $res = mysqli_query($link,$sql) or die(mysqli_error($link));
+                                while ($row = mysqli_fetch_array($res))
+                                {
+                                    $random = rand(1,4);
+                                    $count = $count+1;
+                                    ?>
+                                <thead>
+                                <tr>
+                                    <td colspan = "4" style="font-weight: bold"><?php echo  $row["question"] ?></td>
+                                </tr>
+                                </thead>
+                                     <tr>
+                                         <td colspan = "4" style="background-color: #90EE90" >Зөв Хариулт: <?php echo $row["answer"] ?></td>
+                                     </tr>
+                                <tbody>
+                                <tr>
+                                    <?php
+                                    if($random == 1) {
+                                    ?>
+                                    <td style="background-color: red">A) <?php echo $row["opt1"] ?></td>
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <td>A) <?php echo $row["opt1"] ?></td>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if($random == 2) {
+                                        ?>
+                                        <td style="background-color: red">A) <?php echo $row["opt2"] ?></td>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <td>A) <?php echo $row["opt2"] ?></td>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if($random == 3) {
+                                        ?>
+                                        <td style="background-color: red">A) <?php echo $row["opt3"] ?></td>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <td>A) <?php echo $row["opt3"] ?></td>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if($random == 4) {
+                                        ?>
+                                        <td style="background-color: red">A) <?php echo $row["opt4"] ?></td>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <td>A) <?php echo $row["opt4"] ?></td>
+                                        <?php
+                                    }
+                                    ?>
+                                </tr>
+                                </tbody>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+
+                            </table>
+
+                        </div> <!-- .card -->
+                    </div>
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
     </div>
+
+
 
 </main><!-- End #main -->
 
