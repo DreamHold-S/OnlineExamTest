@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "connection.php"
+
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ include "connection.php"
 <body>
 <link rel="stylesheet" href="style.css">
 <div class="login">
-    <h2>Нэвтрэх Хэсэг</h2>
+    <h2>Нэвтрэх Хэсэг Онлайн Тест</h2>
     <form action="" method="post"  name="form1">
         <div class="imgcontainer">
             <img src="image/avatar.png" alt="Avatar" class="avatar">

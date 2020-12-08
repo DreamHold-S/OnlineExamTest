@@ -87,9 +87,10 @@ if(isset($_POST["submit1"])) {
 
    ?>
     <script type="text/javascript">
-        alert("Амжилттай хадгаллаа");
-        window.location.href = "add_edit_questions.php?id=<?php echo $id1?>";
-    </script>
+        alert("Амжилттай хадгаллаа");    </script>
+    window.location.href = "add_edit_questions.php?id=<?php echo $id1?>";
+
+
     <?php
 }
 ?>

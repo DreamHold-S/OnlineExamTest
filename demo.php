@@ -90,7 +90,7 @@
 
         <div class="mr-md-auto text-center text-md-left">
             <div class="copyright">
-                &copy; Copyright <strong><span>Mentor</span></strong>. All Rights Reserved
+                <strong><span>Сургалт-Амжилт</span></strong> Development Contact Me : 88994908
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->

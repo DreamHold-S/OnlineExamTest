@@ -29,7 +29,6 @@ session_start();
 
 <body>
 <!-- Left Panel -->
-
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
 
@@ -58,7 +57,8 @@ session_start();
                     <a href="editTeacher.php"> <i class="menu-icon fa fa-dashboard"></i>Багш мэдээлэл засах</a>
                     <a href="addCourse.php"> <i class="menu-icon fa fa-dashboard"></i>Хичээл мэдээлэл оруулах</a>
                     <a href="editCourse.php"> <i class="menu-icon fa fa-dashboard"></i>Хичээл мэдээлэл засах</a>
-                    <a href="logout.php"> <i class="menu-icon fa fa-dashboard"></i>Гарах</a>
+                    <a href="userCourseRole.php"> <i class="menu-icon fa fa-dashboard"></i>Промо код өгөх</a>
+                    <a href="video.php"> <i class="menu-icon fa fa-dashboard"></i>Video Хичээл оруулах</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
